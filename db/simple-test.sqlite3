@@ -1,0 +1,28 @@
+BEGIN TRANSACTION;
+CREATE TABLE "step" (
+	`description`	TEXT NOT NULL,
+	`action`	INTEGER NOT NULL,
+	`css_selector`	TEXT,
+	`text`	TEXT,
+	`expectation`	INTEGER,
+	`key_code`	TEXT,
+	`step_id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE
+);
+INSERT INTO `step` (description,action,css_selector,text,expectation,key_code,step_id) VALUES ('Go to URL',1,'','https://google.com',NULL,NULL,1),
+ ('Search',2,'#lst-ib','foo',NULL,NULL,2),
+ ('Press ENTER',3,'#lst-ib',NULL,NULL,'13',3),
+ ('Expectation',1,'#search a','foo',1,NULL,4);
+CREATE TABLE "expectation" (
+	`expectation_id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`description`	TEXT NOT NULL
+);
+INSERT INTO `expectation` (expectation_id,description) VALUES (1,'To contain');
+CREATE TABLE "action" (
+	`action_id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`description`	TEXT NOT NULL
+);
+INSERT INTO `action` (action_id,description) VALUES (1,'Go to URL'),
+ (2,'Write text'),
+ (3,'Press key'),
+ (4,'Add expection');
+COMMIT;
