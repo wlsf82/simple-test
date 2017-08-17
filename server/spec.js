@@ -1,4 +1,12 @@
-const steps = [
+const beforeAllSteps = [
+    {
+        description: "Go to URL",
+        action: "Go to URL",
+        text: "https://talkingabouttesting.com"
+    }
+];
+
+const testSteps = [
     {
         description: "Go to URL",
         action: "Go to URL",
@@ -61,6 +69,6 @@ function mapToSteps(array) {
 
 describe("Google", () => {
     it("search for a text", () => {
-        mapToSteps(steps);
+        mapToSteps(testSteps);
     });
 });
