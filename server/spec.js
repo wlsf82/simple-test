@@ -117,6 +117,10 @@ function mapToSteps(array) {
 }
 
 describe("Google", () => {
+    if (typeof(testSteps[0]) === "undefined") {
+        console.log("Test steps are mandatory!");
+        return;
+    }
     addBeforeAllCallBack(isBeforeAllSet);
 
     addBeforeEachCallBack(isBeforeEachSet);
