@@ -1,3 +1,6 @@
+const testSuiteDescription = "foo";
+const testCaseDescription = "bar";
+
 const beforeAllSteps = [
     {
         description: "Go to URL",
@@ -38,9 +41,9 @@ const testSteps = [
     },
     {
         description: "Expectation",
-        action: "to contain",
-        css_selector: "#search a",
-        text: "foo"
+        action: "To contain",
+        css_selector: "#search h3 a",
+        text: "Foo"
     }
 ];
 
@@ -57,7 +60,7 @@ function pressKey(cssSelector, key) {
 }
 
 function expectToContain(cssSelector, text) {
-    expect(element(by.css(cssSelector)).getText()).toContain(text);
+    expect(element.all(by.css(cssSelector)).first().getText()).toContain(text);
 }
 
 const isBeforeAllSet = true;
@@ -65,7 +68,7 @@ const isBeforeEachSet = true;
 const isAfterEachSet = true;
 const isAfterAllSet = true;
 
-function addBeforeAllCallBack(isSet) {
+function addBeforeAllCallback(isSet) {
     if (isSet) {
         beforeAll(() => {
             mapToSteps(beforeAllSteps);
@@ -73,7 +76,7 @@ function addBeforeAllCallBack(isSet) {
     }
 }
 
-function addBeforeEachCallBack(isSet) {
+function addBeforeEachCallback(isSet) {
     if (isSet) {
         beforeEach(() => {
             mapToSteps(beforeEachSteps);
@@ -81,7 +84,7 @@ function addBeforeEachCallBack(isSet) {
     }
 }
 
-function addAfterAllCallBack(isSet) {
+function addAfterAllCallback(isSet) {
     if (isSet) {
         afterAll(() => {
             mapToSteps(afterAllSteps);
@@ -89,7 +92,7 @@ function addAfterAllCallBack(isSet) {
     }
 }
 
-function addAfterEachCallBack(isSet) {
+function addAfterEachCallback(isSet) {
     if (isSet) {
         afterEach(() => {
             mapToSteps(afterEachSteps);
@@ -97,8 +100,14 @@ function addAfterEachCallBack(isSet) {
     }
 }
 
+function addTestStepsCallback(description) {
+    it(description, () => {
+        mapToSteps(testSteps);
+    });
+}
+
 function mapToSteps(array) {
-    array.forEach((item, i) => {
+    array.forEach((item) => {
         switch (item.action) {
             case "Go to URL":
                 goToUrl(item.text);
@@ -109,27 +118,25 @@ function mapToSteps(array) {
             case "Press key":
                 pressKey(item.css_selector, item.key);
                 break;
-            case "Expectation":
+            case "To contain":
                 expectToContain(item.css_selector, item.text);
                 break;
         }
     });
 }
 
-describe("Google", () => {
+describe(testSuiteDescription, () => {
     if (typeof(testSteps[0]) === "undefined") {
         console.log("Test steps are mandatory!");
         return;
     }
-    addBeforeAllCallBack(isBeforeAllSet);
+    addBeforeAllCallback(isBeforeAllSet);
 
-    addBeforeEachCallBack(isBeforeEachSet);
+    addBeforeEachCallback(isBeforeEachSet);
 
-    it("search for a text", () => {
-        mapToSteps(testSteps);
-    });
+    addTestStepsCallback(testCaseDescription);
 
-    addAfterEachCallBack(isAfterEachSet);
+    addAfterEachCallback(isAfterEachSet);
 
-    addAfterAllCallBack(isAfterAllSet);
+    addAfterAllCallback(isAfterAllSet);
 });
