@@ -126,7 +126,7 @@ function mapToSteps(array) {
 }
 
 describe(testSuiteDescription, () => {
-    if (typeof(testSteps[0]) === "undefined") {
+    if (typeof(testSteps) === "undefined" || typeof(testSteps[0]) === "undefined") {
         console.log("Test steps are mandatory!");
         return;
     }
