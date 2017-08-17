@@ -6,6 +6,18 @@ const beforeAllSteps = [
     }
 ];
 
+const beforeEachSteps = [];
+
+const afterEachSteps = [
+    {
+        description: "Go to URL",
+        action: "Go to URL",
+        text: "https://talkingabouttesting.com/entre-em-contato/"
+    }
+];
+
+const afterAllSteps = [];
+
 const testSteps = [
     {
         description: "Go to URL",
@@ -49,11 +61,38 @@ function expectToContain(cssSelector, text) {
 }
 
 const isBeforeAllSet = true;
+const isBeforeEachSet = true;
+const isAfterEachSet = true;
+const isAfterAllSet = true;
 
 function addBeforeAllCallBack(isSet) {
     if (isSet) {
         beforeAll(() => {
             mapToSteps(beforeAllSteps);
+        });
+    }
+}
+
+function addBeforeEachCallBack(isSet) {
+    if (isSet) {
+        beforeEach(() => {
+            mapToSteps(beforeEachSteps);
+        });
+    }
+}
+
+function addAfterAllCallBack(isSet) {
+    if (isSet) {
+        afterAll(() => {
+            mapToSteps(afterAllSteps);
+        });
+    }
+}
+
+function addAfterEachCallBack(isSet) {
+    if (isSet) {
+        afterEach(() => {
+            mapToSteps(afterEachSteps);
         });
     }
 }
@@ -80,7 +119,13 @@ function mapToSteps(array) {
 describe("Google", () => {
     addBeforeAllCallBack(isBeforeAllSet);
 
+    addBeforeEachCallBack(isBeforeEachSet);
+
     it("search for a text", () => {
         mapToSteps(testSteps);
     });
+
+    addAfterEachCallBack(isAfterEachSet);
+
+    addAfterAllCallBack(isAfterAllSet);
 });
