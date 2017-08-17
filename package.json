@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "protractor": "^5.1.2",
+    "protractor-jasmine2-html-reporter": "0.0.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.11"
