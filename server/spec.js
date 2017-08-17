@@ -61,6 +61,6 @@ function mapToSteps(array) {
 
 describe("Google", () => {
     it("search for a text", () => {
-        mapToSteps(step);
+        mapToSteps(steps);
     });
 });
