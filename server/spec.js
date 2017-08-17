@@ -48,6 +48,16 @@ function expectToContain(cssSelector, text) {
     expect(element(by.css(cssSelector)).getText()).toContain(text);
 }
 
+const isBeforeAllSet = true;
+
+function addBeforeAllCallBack(isSet) {
+    if (isSet) {
+        beforeAll(() => {
+            mapToSteps(beforeAllSteps);
+        });
+    }
+}
+
 function mapToSteps(array) {
     array.forEach((item, i) => {
         switch (item.action) {
@@ -68,6 +78,8 @@ function mapToSteps(array) {
 }
 
 describe("Google", () => {
+    addBeforeAllCallBack(isBeforeAllSet);
+
     it("search for a text", () => {
         mapToSteps(testSteps);
     });
