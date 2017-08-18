@@ -5,7 +5,7 @@ const beforeAllSteps = [
     {
         description: "Go to URL",
         action: "Go to URL",
-        text: "https://talkingabouttesting.com"
+        text: "https://gmail.com"
     }
 ];
 
@@ -15,7 +15,7 @@ const afterEachSteps = [
     {
         description: "Go to URL",
         action: "Go to URL",
-        text: "https://talkingabouttesting.com/entre-em-contato/"
+        text: "https://drive.google.com"
     }
 ];
 
