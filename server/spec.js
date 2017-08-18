@@ -1,5 +1,5 @@
 const testSuiteDescription = "foo";
-const testCaseDescription = "bar";
+const testCaseDescriptions = ["bar","baz"];
 
 const beforeAllSteps = [
     {
@@ -134,7 +134,9 @@ describe(testSuiteDescription, () => {
 
     addBeforeEachCallback(isBeforeEachSet);
 
-    addTestStepsCallback(testCaseDescription);
+    testCaseDescriptions.forEach((testCaseDescription) => {
+        addTestStepsCallback(testCaseDescription);
+    });
 
     addAfterEachCallback(isAfterEachSet);
 
