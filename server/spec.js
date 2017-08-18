@@ -1,51 +1,79 @@
-const testSuiteDescription = "foo";
-const testCaseDescriptions = ["bar","baz"];
-
-const beforeAllSteps = [
+const testSuite =
     {
-        description: "Go to URL",
-        action: "Go to URL",
-        text: "https://gmail.com"
-    }
-];
-
-const beforeEachSteps = [];
-
-const afterEachSteps = [
-    {
-        description: "Go to URL",
-        action: "Go to URL",
-        text: "https://drive.google.com"
-    }
-];
-
-const afterAllSteps = [];
-
-const testSteps = [
-    {
-        description: "Go to URL",
-        action: "Go to URL",
-        text: "https://google.com"
-    },
-    {
-        description: "Search",
-        action: "Enter text",
-        css_selector: "#lst-ib",
-        text: "foo"
-    },
-    {
-        description: "Press ENTER",
-        action: "Press key",
-        css_selector: "#lst-ib",
-        key: "ENTER"
-    },
-    {
-        description: "Expectation",
-        action: "To contain",
-        css_selector: "#search h3 a",
-        text: "Foo"
-    }
-];
+        description: "foo",
+        beforeAll: [
+            {
+                description: "Go to URL",
+                action: "Go to URL",
+                text: "https://gmail.com"
+            }
+        ],
+        beforeEach: [],
+        afterEach: [
+            {
+                description: "Go to URL",
+                action: "Go to URL",
+                text: "https://drive.google.com"
+            }
+        ],
+        afterAll: [],
+        testCases: [{
+            description: "bar",
+            steps: [
+                {
+                    description: "Go to URL",
+                    action: "Go to URL",
+                    text: "https://google.com"
+                },
+                {
+                    description: "Search",
+                    action: "Enter text",
+                    css_selector: "#lst-ib",
+                    text: "foo"
+                },
+                {
+                    description: "Press ENTER",
+                    action: "Press key",
+                    css_selector: "#lst-ib",
+                    key: "ENTER"
+                },
+                {
+                    description: "Expectation",
+                    action: "To contain",
+                    css_selector: "#search h3 a",
+                    text: "Foo"
+                }
+            ]
+        },
+        {
+            description: "baz",
+            steps: [
+                {
+                    description: "Go to URL",
+                    action: "Go to URL",
+                    text: "https://google.com"
+                },
+                {
+                    description: "Search",
+                    action: "Enter text",
+                    css_selector: "#lst-ib",
+                    text: "foobar"
+                },
+                {
+                    description: "Press ENTER",
+                    action: "Press key",
+                    css_selector: "#lst-ib",
+                    key: "ENTER"
+                },
+                {
+                    description: "Expectation",
+                    action: "To contain",
+                    css_selector: "#search h3 a",
+                    text: "foobar"
+                }
+            ]
+        }]
+    };
 
 function goToUrl(url) {
     browser.get(url);
@@ -71,7 +99,7 @@ const isAfterAllSet = true;
 function addBeforeAllCallback(isSet) {
     if (isSet) {
         beforeAll(() => {
-            mapToSteps(beforeAllSteps);
+            mapToSteps(testSuite.beforeAll);
         });
     }
 }
@@ -79,7 +107,7 @@ function addBeforeAllCallback(isSet) {
 function addBeforeEachCallback(isSet) {
     if (isSet) {
         beforeEach(() => {
-            mapToSteps(beforeEachSteps);
+            mapToSteps(testSuite.beforeEach);
         });
     }
 }
@@ -87,7 +115,7 @@ function addBeforeEachCallback(isSet) {
 function addAfterAllCallback(isSet) {
     if (isSet) {
         afterAll(() => {
-            mapToSteps(afterAllSteps);
+            mapToSteps(testSuite.afterAll);
         });
     }
 }
@@ -95,12 +123,18 @@ function addAfterAllCallback(isSet) {
 function addAfterEachCallback(isSet) {
     if (isSet) {
         afterEach(() => {
-            mapToSteps(afterEachSteps);
+            mapToSteps(testSuite.afterEach);
         });
     }
 }
 
-function addTestStepsCallback(description) {
+function addTestCasesOnTestSuite(testSuite) {
+    testSuite.testCases.forEach((testCase) => {
+        addStepsOnTestCase(testCase.description, testCase.steps);
+    });
+}
+
+function addStepsOnTestCase(description, testSteps) {
     it(description, () => {
         mapToSteps(testSteps);
     });
@@ -125,18 +159,17 @@ function mapToSteps(array) {
     });
 }
 
-describe(testSuiteDescription, () => {
-    if (typeof(testSteps) === "undefined" || typeof(testSteps[0]) === "undefined") {
+describe(testSuite.description, () => {
+    if (typeof(testSuite.testCases) === "undefined" || typeof(testSuite.testCases[0]) === "undefined") {
         console.log("Test steps are mandatory!");
         return;
     }
+
     addBeforeAllCallback(isBeforeAllSet);
 
     addBeforeEachCallback(isBeforeEachSet);
 
-    testCaseDescriptions.forEach((testCaseDescription) => {
-        addTestStepsCallback(testCaseDescription);
-    });
+    addTestCasesOnTestSuite(testSuite);
 
     addAfterEachCallback(isAfterEachSet);
 
