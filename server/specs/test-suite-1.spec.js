@@ -1,5 +1,5 @@
-Helper = require("../helper");
-helper = new Helper();
+TestSuiteHelper = require("../TestSuiteHelper");
+testSuiteHelper = new TestSuiteHelper();
 
 const sampleTestSuite =
     {
@@ -93,13 +93,13 @@ describe(sampleTestSuite.description, () => {
         return;
     }
 
-    helper.addBeforeAllCallbackOnTestSuite(sampleTestSuite, isBeforeAllSet);
+    testSuiteHelper.addBeforeAllCallbackOnTestSuite(sampleTestSuite, isBeforeAllSet);
 
-    helper.addBeforeEachCallbackOnTestSuite(sampleTestSuite, isBeforeEachSet);
+    testSuiteHelper.addBeforeEachCallbackOnTestSuite(sampleTestSuite, isBeforeEachSet);
 
-    helper.addTestCasesCallbacksOnTestSuite(sampleTestSuite);
+    testSuiteHelper.addTestCasesCallbacksOnTestSuite(sampleTestSuite);
 
-    helper.addAfterEachCallbackOnTestSuite(sampleTestSuite, isAfterEachSet);
+    testSuiteHelper.addAfterEachCallbackOnTestSuite(sampleTestSuite, isAfterEachSet);
 
-    helper.addAfterAllCallbackOnTestSuite(sampleTestSuite, isAfterAllSet);
+    testSuiteHelper.addAfterAllCallbackOnTestSuite(sampleTestSuite, isAfterAllSet);
 });
