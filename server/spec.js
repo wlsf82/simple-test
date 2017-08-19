@@ -4,13 +4,13 @@ const sampleTestSuite =
         beforeAll: [
             {
                 action: "Go to URL",
-                text: "https://gmail.com"
+                url: "https://gmail.com"
             }
         ],
         beforeEach: [
             {
                 action: "Go to URL",
-                text: "https://google.com"
+                url: "https://google.com"
             },
             {
                 action: "Click",
@@ -20,13 +20,13 @@ const sampleTestSuite =
         afterEach: [
             {
                 action: "Go to URL",
-                text: "https://drive.google.com"
+                url: "https://drive.google.com"
             }
         ],
         afterAll: [
             {
                 action: "Go to URL",
-                text: "http://google.com/pagenotfound"
+                url: "http://google.com/pagenotfound"
             }
         ],
         testCases: [{
@@ -34,7 +34,7 @@ const sampleTestSuite =
             steps: [
                 {
                     action: "Go to URL",
-                    text: "https://google.com"
+                    url: "https://google.com"
                 },
                 {
                     action: "Enter text",
@@ -58,7 +58,7 @@ const sampleTestSuite =
             steps: [
                 {
                     action: "Go to URL",
-                    text: "https://google.com"
+                    url: "https://google.com"
                 },
                 {
                     action: "Enter text",
@@ -128,23 +128,23 @@ function addStepsOnTestCaseBeasedOnDescription(description, steps) {
     });
 }
 
-function mapToSteps(array) {
-    array.forEach((item) => {
-        switch (item.action) {
+function mapToSteps(testCase) {
+    testCase.forEach((step) => {
+        switch (step.action) {
             case "Go to URL":
-                goToUrl(item.text);
+                goToUrl(step.url);
                 break;
             case "Enter text":
-                enterText(item.css_selector, item.text);
+                enterText(step.css_selector, step.text);
                 break;
             case "Press key":
-                pressKey(item.css_selector, item.key);
+                pressKey(step.css_selector, step.key);
                 break;
             case "Click":
-                click(item.css_selector);
+                click(step.css_selector);
                 break;
             case "Expect to contain":
-                expectToContain(item.css_selector, item.text);
+                expectToContain(step.css_selector, step.text);
                 break;
         }
     });
