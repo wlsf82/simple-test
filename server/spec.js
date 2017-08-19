@@ -1,73 +1,77 @@
-const testSuite =
+const sampleTestSuite =
     {
-        description: "foo",
+        description: "Google",
         beforeAll: [
             {
-                description: "Go to URL",
                 action: "Go to URL",
                 text: "https://gmail.com"
             }
         ],
-        beforeEach: [],
+        beforeEach: [
+            {
+                action: "Go to URL",
+                text: "https://google.com"
+            },
+            {
+                action: "Click",
+                css_selector: "input[name='btnI']"
+            }
+        ],
         afterEach: [
             {
-                description: "Go to URL",
                 action: "Go to URL",
                 text: "https://drive.google.com"
             }
         ],
-        afterAll: [],
+        afterAll: [
+            {
+                action: "Go to URL",
+                text: "http://google.com/pagenotfound"
+            }
+        ],
         testCases: [{
-            description: "bar",
+            description: "search for 'foo'",
             steps: [
                 {
-                    description: "Go to URL",
                     action: "Go to URL",
                     text: "https://google.com"
                 },
                 {
-                    description: "Search",
                     action: "Enter text",
                     css_selector: "#lst-ib",
                     text: "foo"
                 },
                 {
-                    description: "Press ENTER",
                     action: "Press key",
                     css_selector: "#lst-ib",
                     key: "ENTER"
                 },
                 {
-                    description: "Expectation",
-                    action: "To contain",
+                    action: "Expect to contain",
                     css_selector: "#search h3 a",
                     text: "Foo"
                 }
             ]
         },
         {
-            description: "baz",
+            description: "search for 'foobar'",
             steps: [
                 {
-                    description: "Go to URL",
                     action: "Go to URL",
                     text: "https://google.com"
                 },
                 {
-                    description: "Search",
                     action: "Enter text",
                     css_selector: "#lst-ib",
                     text: "foobar"
                 },
                 {
-                    description: "Press ENTER",
                     action: "Press key",
                     css_selector: "#lst-ib",
                     key: "ENTER"
                 },
                 {
-                    description: "Expectation",
-                    action: "To contain",
+                    action: "Expect to contain",
                     css_selector: "#search h3 a",
                     text: "foobar"
                 }
@@ -83,7 +87,7 @@ const isAfterAllSet = true;
 function addBeforeAllCallback(isSet) {
     if (isSet) {
         beforeAll(() => {
-            mapToSteps(testSuite.beforeAll);
+            mapToSteps(sampleTestSuite.beforeAll);
         });
     }
 }
@@ -91,7 +95,7 @@ function addBeforeAllCallback(isSet) {
 function addBeforeEachCallback(isSet) {
     if (isSet) {
         beforeEach(() => {
-            mapToSteps(testSuite.beforeEach);
+            mapToSteps(sampleTestSuite.beforeEach);
         });
     }
 }
@@ -99,7 +103,7 @@ function addBeforeEachCallback(isSet) {
 function addAfterAllCallback(isSet) {
     if (isSet) {
         afterAll(() => {
-            mapToSteps(testSuite.afterAll);
+            mapToSteps(sampleTestSuite.afterAll);
         });
     }
 }
@@ -107,20 +111,20 @@ function addAfterAllCallback(isSet) {
 function addAfterEachCallback(isSet) {
     if (isSet) {
         afterEach(() => {
-            mapToSteps(testSuite.afterEach);
+            mapToSteps(sampleTestSuite.afterEach);
         });
     }
 }
 
-function addTestCasesOnTestSuite(testSuite) {
+function addTestCasesCallbacksOnTestSuite(testSuite) {
     testSuite.testCases.forEach((testCase) => {
-        addStepsOnTestCase(testCase.description, testCase.steps);
+        addStepsOnTestCaseBeasedOnDescription(testCase.description, testCase.steps);
     });
 }
 
-function addStepsOnTestCase(description, testSteps) {
+function addStepsOnTestCaseBeasedOnDescription(description, steps) {
     it(description, () => {
-        mapToSteps(testSteps);
+        mapToSteps(steps);
     });
 }
 
@@ -136,7 +140,10 @@ function mapToSteps(array) {
             case "Press key":
                 pressKey(item.css_selector, item.key);
                 break;
-            case "To contain":
+            case "Click":
+                click(item.css_selector);
+                break;
+            case "Expect to contain":
                 expectToContain(item.css_selector, item.text);
                 break;
         }
@@ -151,6 +158,10 @@ function enterText(cssSelector, text) {
     element(by.css(cssSelector)).sendKeys(text);
 }
 
+function click(cssSelector) {
+    element(by.css(cssSelector)).click();
+}
+
 function pressKey(cssSelector, key) {
     element(by.css(cssSelector)).sendKeys(protractor.Key[key]);
 }
@@ -159,8 +170,8 @@ function expectToContain(cssSelector, text) {
     expect(element.all(by.css(cssSelector)).first().getText()).toContain(text);
 }
 
-describe(testSuite.description, () => {
-    if (typeof(testSuite.testCases) === "undefined" || typeof(testSuite.testCases[0]) === "undefined") {
+describe(sampleTestSuite.description, () => {
+    if (typeof(sampleTestSuite.testCases) === "undefined" || typeof(sampleTestSuite.testCases[0]) === "undefined") {
         console.log("Test steps are mandatory!");
         return;
     }
@@ -169,7 +180,7 @@ describe(testSuite.description, () => {
 
     addBeforeEachCallback(isBeforeEachSet);
 
-    addTestCasesOnTestSuite(testSuite);
+    addTestCasesCallbacksOnTestSuite(sampleTestSuite);
 
     addAfterEachCallback(isAfterEachSet);
 
