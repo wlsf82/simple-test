@@ -155,15 +155,15 @@ function goToUrl(url) {
 }
 
 function enterText(cssSelector, text) {
-    element(by.css(cssSelector)).sendKeys(text);
+    element.all(by.css(cssSelector)).first().sendKeys(text);
 }
 
 function click(cssSelector) {
-    element(by.css(cssSelector)).click();
+    element.all(by.css(cssSelector)).first().click();
 }
 
 function pressKey(cssSelector, key) {
-    element(by.css(cssSelector)).sendKeys(protractor.Key[key]);
+    element.all(by.css(cssSelector)).first().sendKeys(protractor.Key[key]);
 }
 
 function expectToContain(cssSelector, text) {
