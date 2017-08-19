@@ -75,22 +75,6 @@ const testSuite =
         }]
     };
 
-function goToUrl(url) {
-    browser.get(url);
-}
-
-function enterText(cssSelector, text) {
-    element(by.css(cssSelector)).sendKeys(text);
-}
-
-function pressKey(cssSelector, key) {
-    element(by.css(cssSelector)).sendKeys(protractor.Key[key]);
-}
-
-function expectToContain(cssSelector, text) {
-    expect(element.all(by.css(cssSelector)).first().getText()).toContain(text);
-}
-
 const isBeforeAllSet = true;
 const isBeforeEachSet = true;
 const isAfterEachSet = true;
@@ -157,6 +141,22 @@ function mapToSteps(array) {
                 break;
         }
     });
+}
+
+function goToUrl(url) {
+    browser.get(url);
+}
+
+function enterText(cssSelector, text) {
+    element(by.css(cssSelector)).sendKeys(text);
+}
+
+function pressKey(cssSelector, key) {
+    element(by.css(cssSelector)).sendKeys(protractor.Key[key]);
+}
+
+function expectToContain(cssSelector, text) {
+    expect(element.all(by.css(cssSelector)).first().getText()).toContain(text);
 }
 
 describe(testSuite.description, () => {
