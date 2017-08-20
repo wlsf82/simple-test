@@ -88,10 +88,7 @@ const isAfterEachSet = true;
 const isAfterAllSet = true;
 
 describe(sampleTestSuite.description, () => {
-    if (typeof(sampleTestSuite.testCases) === "undefined" || typeof(sampleTestSuite.testCases[0]) === "undefined") {
-        console.log("Test steps are mandatory!");
-        return;
-    }
+    testSuiteHelper.checkIfTestCasesAreSet(sampleTestSuite);
 
     testSuiteHelper.addBeforeAllCallbackOnTestSuite(sampleTestSuite, isBeforeAllSet);
 

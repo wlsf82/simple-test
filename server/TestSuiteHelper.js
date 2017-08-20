@@ -42,6 +42,13 @@ class TestSuiteHelper {
             testCasesFactory.addStepsOnTestCaseBeasedOnDescription(testCase.description, testCase.steps);
         });
     }
+
+    checkIfTestCasesAreSet(testSuite) {
+        if (typeof(testSuite.testCases) === "undefined" || typeof(testSuite.testCases[0]) === "undefined") {
+            console.log("Test cases are mandatory!");
+            return;
+        }
+    }
 }
 
 module.exports = TestSuiteHelper;
