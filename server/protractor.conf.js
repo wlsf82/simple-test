@@ -10,7 +10,7 @@ module.exports.config = {
         browser.ignoreSynchronization = true;
 
         jasmine.getEnv().addReporter(new Jasmine2HtmlReporter({
-            savePath: "server/test-report",
+            savePath: "test-report",
             fileName: "e2e-test-report",
             fixedScreenshotName: true,
             cleanDestination: false,
