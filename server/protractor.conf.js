@@ -2,13 +2,10 @@ const Jasmine2HtmlReporter = require("protractor-jasmine2-html-reporter");
 
 module.exports.config = {
     directConnect: true,
-
     specs: [ "./specs/*.spec.js" ],
-
     capabilities: {
         "browserName": "chrome",
     },
-
     onPrepare() {
         browser.ignoreSynchronization = true;
 
