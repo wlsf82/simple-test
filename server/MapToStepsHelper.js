@@ -2,7 +2,7 @@ const StepsFactory = require("./StepsFactory");
 const stepsFactory = new StepsFactory();
 
 class MapToStepsHelper {
-    mapToSteps(testCase) {
+    addSteps(testCase) {
         testCase.forEach((step) => {
             switch (step.action) {
                 case "Go to URL":

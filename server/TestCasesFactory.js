@@ -4,7 +4,7 @@ const mapToStepsHelper = new MapToStepsHelper();
 class TestCasesFactory {
     addStepsOnTestCaseBeasedOnDescription(description, steps) {
         it(description, () => {
-            mapToStepsHelper.mapToSteps(steps);
+            mapToStepsHelper.addSteps(steps);
         });
     }
 }

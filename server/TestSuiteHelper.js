@@ -8,7 +8,7 @@ class TestSuiteHelper {
     addBeforeAllCallbackOnTestSuite(testSuite, isSet) {
         if (isSet) {
             beforeAll(() => {
-                mapToStepsHelper.mapToSteps(testSuite.beforeAll);
+                mapToStepsHelper.addSteps(testSuite.beforeAll);
             });
         }
     }
@@ -16,7 +16,7 @@ class TestSuiteHelper {
     addBeforeEachCallbackOnTestSuite(testSuite, isSet) {
         if (isSet) {
             beforeEach(() => {
-                mapToStepsHelper.mapToSteps(testSuite.beforeEach);
+                mapToStepsHelper.addSteps(testSuite.beforeEach);
             });
         }
     }
@@ -24,7 +24,7 @@ class TestSuiteHelper {
     addAfterAllCallbackOnTestSuite(testSuite, isSet) {
         if (isSet) {
             afterAll(() => {
-                mapToStepsHelper.mapToSteps(testSuite.afterAll);
+                mapToStepsHelper.addSteps(testSuite.afterAll);
             });
         }
     }
@@ -32,7 +32,7 @@ class TestSuiteHelper {
     addAfterEachCallbackOnTestSuite(testSuite, isSet) {
         if (isSet) {
             afterEach(() => {
-                mapToStepsHelper.mapToSteps(testSuite.afterEach);
+                mapToStepsHelper.addSteps(testSuite.afterEach);
             });
         }
     }
