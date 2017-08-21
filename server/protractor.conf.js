@@ -6,6 +6,9 @@ module.exports.config = {
     capabilities: {
         "browserName": "chrome",
     },
+    params: {
+        DEFAULT_TIMEOUT_MS: 3000,
+    },
     onPrepare() {
         browser.ignoreSynchronization = true;
 
