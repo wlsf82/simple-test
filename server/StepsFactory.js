@@ -1,22 +1,44 @@
+const EC = protractor.ExpectedConditions;
+
+function retrieveFirstElement(cssSelector) {
+    return element.all(by.css(cssSelector)).first();
+}
+
+function retrieveAllElements(cssSelector) {
+    return element.all(by.css(cssSelector));
+}
+
 class StepsFactory {
     goToUrl(url) {
         browser.get(url);
     }
 
     enterText(cssSelector, text) {
-        element.all(by.css(cssSelector)).first().sendKeys(text);
+        const elementToInteract = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.visibilityOf(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
+        elementToInteract.sendKeys(text);
     }
 
     clearTextField(cssSelector) {
-        element.all(by.css(cssSelector)).first().clear();
+        const elementToInteract = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.visibilityOf(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
+        elementToInteract.clear();
     }
 
     click(cssSelector) {
-        element.all(by.css(cssSelector)).first().click();
+        const elementToInteract = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.elementToBeClickable(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
+        elementToInteract.click();
     }
 
     pressKey(cssSelector, key) {
-        element.all(by.css(cssSelector)).first().sendKeys(protractor.Key[key]);
+        const elementToInteract = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.visibilityOf(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
+        elementToInteract.sendKeys(protractor.Key[key]);
     }
 
     refresh() {
@@ -24,39 +46,67 @@ class StepsFactory {
     }
 
     expectToContain(cssSelector, text) {
-        expect(element.all(by.css(cssSelector)).first().getText()).toContain(text);
+        const elementToExpect = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpect.getText()).toContain(text);
     }
 
     expectNotToContain(cssSelector, text) {
-        expect(element.all(by.css(cssSelector)).first().getText()).not.toContain(text);
+        const elementToExpect = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpect.getText()).not.toContain(text);
     }
 
     expectToEqual(cssSelector, text) {
-        expect(element.all(by.css(cssSelector)).first().getText()).toEqual(text);
+        const elementToExpect = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpect.getText()).toEqual(text);
     }
 
     expectNotToEqual(cssSelector, text) {
-        expect(element.all(by.css(cssSelector)).first().getText()).not.toEqual(text);
+        const elementToExpect = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpect.getText()).not.toEqual(text);
     }
 
     expectCountToBe(cssSelector, number) {
-        expect(element.all(by.css(cssSelector)).count()).toBe(number);
+        const elementsToCount = retrieveAllElements(cssSelector);
+        const firstElementBasedOnElementsToCount = elementsToCount.first();
+
+        browser.wait(EC.visibilityOf(firstElementBasedOnElementsToCount), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementsToCount.count()).toBe(number);
     }
 
     expectToBeDisplayed(cssSelector) {
-        expect(element.all(by.css(cssSelector)).first().isDisplayed().toBe(true));
+        const elementToExpect = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpect.isDisplayed()).toBe(true);
     }
 
     expectNotToBeDisplayed(cssSelector) {
-        expect(element.all(by.css(cssSelector)).first().isDisplayed().not.toBe(true));
+        const elementToExpectNot = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.invisibilityOf(elementToExpectNot), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpectNot.isDisplayed()).not.toBe(true);
     }
 
     expectToBePresent(cssSelector) {
-        expect(element.all(by.css(cssSelector)).first().isPresent().toBe(true));
+        const elementToExpect = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.presenceOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpect.isPresent()).toBe(true);
     }
 
     expectNotToBePresent(cssSelector) {
-        expect(element.all(by.css(cssSelector)).first().isPresent().not.toBe(true));
+        const elementToExpectNot = retrieveFirstElement(cssSelector);
+
+        browser.wait(EC.stalenessOf(elementToExpectNot), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpectNot.isPresent()).not.toBe(true);
     }
 }
 
