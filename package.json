@@ -4,11 +4,15 @@
   "private": true,
   "dependencies": {
     "keycode": "^2.1.9",
+    "knex": "^0.13.0",
+    "mkdirp": "^0.5.1",
     "protractor": "^5.1.2",
     "protractor-jasmine2-html-reporter": "0.0.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.11"
+    "react-scripts": "1.0.11",
+    "rimraf": "^2.6.1",
+    "sqlite3": "^3.1.9"
   },
   "scripts": {
     "start": "react-scripts start",
