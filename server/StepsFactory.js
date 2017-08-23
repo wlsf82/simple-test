@@ -1,3 +1,4 @@
+const keycode = require("keycode");
 const EC = protractor.ExpectedConditions;
 
 function retrieveFirstElement(cssSelector) {
@@ -34,7 +35,8 @@ class StepsFactory {
         elementToInteract.click();
     }
 
-    pressKey(cssSelector, key) {
+    pressKey(cssSelector, keyCode) {
+        const key = keycode(keyCode).toUpperCase();
         const elementToInteract = retrieveFirstElement(cssSelector);
 
         browser.wait(EC.visibilityOf(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
