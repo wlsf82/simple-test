@@ -87,9 +87,9 @@ class StepsFactory {
 
     expectCountToBe(cssSelector, number) {
         const elementsToCount = retrieveAllElements(cssSelector);
-        const firstElementBasedOnElementsToCount = elementsToCount.first();
+        const lastElementBasedOnElementsToCount = elementsToCount.last();
 
-        browser.wait(EC.visibilityOf(firstElementBasedOnElementsToCount), browser.params.DEFAULT_TIMEOUT_MS);
+        browser.wait(EC.visibilityOf(lastElementBasedOnElementsToCount), browser.params.DEFAULT_TIMEOUT_MS);
         expect(elementsToCount.count()).toBe(number);
     }
 
