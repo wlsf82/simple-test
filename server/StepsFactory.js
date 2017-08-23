@@ -1,6 +1,18 @@
 const keycode = require("keycode");
 const EC = protractor.ExpectedConditions;
 
+function elementWithAttributeHasValue(htmlElement, attribute, value) {
+    return htmlElement.getAttribute(attribute).then((elementAttribute) => {
+        return elementAttribute.includes(value);
+    });
+}
+
+function elementWithAttributeHasNotValue(htmlElement, attribute, value) {
+    return htmlElement.getAttribute(attribute).then((elementAttribute) => {
+        return !elementAttribute.includes(value);
+    });
+}
+
 function retrieveFirstElement(cssSelector) {
     return element.all(by.css(cssSelector)).first();
 }
@@ -109,6 +121,25 @@ class StepsFactory {
 
         browser.wait(EC.stalenessOf(elementToExpectNot), browser.params.DEFAULT_TIMEOUT_MS);
         expect(elementToExpectNot.isPresent()).not.toBe(true);
+    }
+
+    expectCurrentUrlToEqual(expectedUrl) {
+        browser.wait(EC.urlIs(expectedUrl), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(browser.getCurrentUrl()).toEqual(expectedUrl);
+    }
+
+    expectElementWithAttributeToContainValue(cssSelector, attribute, value) {
+        const elementToExpect = retrieveFirstElement(cssSelector);
+
+        browser.wait(elementWithAttributeHasValue(elementToExpect, attribute, value), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpect.getAttribute(attribute)).toContain(value);
+    }
+
+    expectElementWithAttributeNotToContainValue(cssSelector, attribute, value) {
+        const elementToExpect = retrieveFirstElement(cssSelector);
+
+        browser.wait(elementWithAttributeHasNotValue(elementToExpect, attribute, value), browser.params.DEFAULT_TIMEOUT_MS);
+        expect(elementToExpect.getAttribute(attribute)).not.toContain(value);
     }
 }
 
