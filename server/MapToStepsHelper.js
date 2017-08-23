@@ -19,18 +19,18 @@ const EXPECT_NOT_TO_BE_PRESENT = "Expect not to be present";
 class MapToStepsHelper {
     addSteps(testCase) {
         testCase.forEach((step) => {
-            switch (step.action) {
+            switch (step.description) {
                 case GO_TO_URL:
-                    stepsFactory.goToUrl(step.url);
+                    stepsFactory.goToUrl(step.string);
                     break;
                 case ENTER_TEXT:
-                    stepsFactory.enterText(step.css_selector, step.text);
+                    stepsFactory.enterText(step.css_selector, step.string);
                     break;
                 case CLEAR_TEXT_FIELD:
                     stepsFactory.clearTextField(step.css_selector);
                     break;
                 case PRESS_KEY:
-                    stepsFactory.pressKey(step.css_selector, step.key);
+                    stepsFactory.pressKey(step.css_selector, step.key_code);
                     break;
                 case REFRESH_PAGE:
                     stepsFactory.refresh();
@@ -39,16 +39,16 @@ class MapToStepsHelper {
                     stepsFactory.click(step.css_selector);
                     break;
                 case EXPECT_TO_CONTAIN:
-                    stepsFactory.expectToContain(step.css_selector, step.text);
+                    stepsFactory.expectToContain(step.css_selector, step.string);
                     break;
                 case EXPECT_NOT_TO_CONTAIN:
-                    stepsFactory.expectNotToContain(step.css_selector, step.text);
+                    stepsFactory.expectNotToContain(step.css_selector, step.string);
                     break;
                 case EXPECT_TO_EQUAL:
-                    stepsFactory.expectToEqual(step.css_selector, step.text);
+                    stepsFactory.expectToEqual(step.css_selector, step.string);
                     break;
                 case EXPECT_NOT_TO_EQUAL:
-                    stepsFactory.expectNotToEqual(step.css_selector, step.text);
+                    stepsFactory.expectNotToEqual(step.css_selector, step.string);
                     break;
                 case EXPECT_COUNT_TO_BE:
                     stepsFactory.expectCountToBe(step.css_selector, step.number);

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "keycode": "^2.1.9",
     "protractor": "^5.1.2",
     "protractor-jasmine2-html-reporter": "0.0.7",
     "react": "^15.6.1",
