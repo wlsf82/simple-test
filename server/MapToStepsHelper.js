@@ -15,6 +15,9 @@ const EXPECT_TO_BE_DISPLAYED = "Expect to be displayed";
 const EXPECT_NOT_TO_BE_DISPLAYED = "Expect not to be displayed";
 const EXPECT_TO_BE_PRESENT = "Expect to be present";
 const EXPECT_NOT_TO_BE_PRESENT = "Expect not to be present";
+const EXPECT_CURRENT_URL_TO_EQUAL = "Expect current URL to equal";
+const EXPECT_ELEMENT_WITH_ATTRIBUTE_TO_CONTAIN_VALUE = "Expect element with attribute to contain value";
+const EXPECT_ELEMENT_WITH_ATTRIBUTE_NOT_TO_CONTAIN_VALUE = "Expect element with attribute not to contain value";
 
 class MapToStepsHelper {
     addSteps(testCase) {
@@ -64,6 +67,15 @@ class MapToStepsHelper {
                     break;
                 case EXPECT_NOT_TO_BE_PRESENT:
                     stepsFactory.expectNotToBePresent(step.css_selector);
+                    break;
+                case EXPECT_CURRENT_URL_TO_EQUAL:
+                    stepsFactory.expectCurrentUrlToEqual(step.expectedUrl);
+                    break;
+                case EXPECT_ELEMENT_WITH_ATTRIBUTE_TO_CONTAIN_VALUE:
+                    stepsFactory.expectElementWithAttributeToContainValue(step.css_selector, step.attribute, step.value);
+                    break;
+                case EXPECT_ELEMENT_WITH_ATTRIBUTE_NOT_TO_CONTAIN_VALUE:
+                    stepsFactory.expectElementWithAttributeNotToContainValue(step.css_selector, step.attribute, step.value);
                     break;
             }
         });
