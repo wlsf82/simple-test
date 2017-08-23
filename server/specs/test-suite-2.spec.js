@@ -27,6 +27,53 @@ const sampleTestSuite =
                     text: "Foo"
                 }
             ]
+        },
+        {
+            description: "expect URL to change",
+            steps: [
+                {
+                    action: "Go to URL",
+                    url: "http://todomvc.com"
+                },
+                {
+                    action: "Click",
+                    css_selector: "a[href='examples/react']"
+                },
+                {
+                    action: "Expect current URL to equal",
+                    expectedUrl: "http://todomvc.com/examples/react/#/",
+                }
+            ]
+        },
+        {
+            description: "expect element with attribute to contain value",
+            steps: [
+                {
+                    action: "Go to URL",
+                    url: "http://todomvc.com/examples/react/#/",
+                },
+                {
+                    action: "Expect element with attribute to contain value",
+                    css_selector: ".new-todo",
+                    attribute: "placeholder",
+                    value: "What needs to be done?"
+                }
+            ]
+        },
+        {
+            description: "expect element with attribute not to contain value",
+            steps: [
+                {
+                    action: "Go to URL",
+                    url: "http://todomvc.com/examples/react/#/",
+                },
+                {
+                    action: "Expect element with attribute not to contain value",
+                    css_selector: ".new-todo",
+                    attribute: "placeholder",
+                    value: "foobarbaz"
+                }
+            ]
         }]
     };
 
