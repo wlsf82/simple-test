@@ -1,17 +1,6 @@
 const keycode = require("keycode");
-const EC = protractor.ExpectedConditions;
-
-function elementWithAttributeHasValue(htmlElement, attribute, value) {
-    return htmlElement.getAttribute(attribute).then((elementAttribute) => {
-        return elementAttribute.includes(value);
-    });
-}
-
-function elementWithAttributeHasNotValue(htmlElement, attribute, value) {
-    return htmlElement.getAttribute(attribute).then((elementAttribute) => {
-        return !elementAttribute.includes(value);
-    });
-}
+const WaitersHelper = require("./waitersHelper");
+const waitersHelper = new WaitersHelper();
 
 function retrieveFirstElement(cssSelector) {
     return element.all(by.css(cssSelector)).first();
@@ -29,21 +18,21 @@ class StepsFactory {
     enterText(cssSelector, text) {
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.visibilityOf(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(elementToInteract);
         elementToInteract.sendKeys(text);
     }
 
     clearTextField(cssSelector) {
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.visibilityOf(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(elementToInteract);
         elementToInteract.clear();
     }
 
     click(cssSelector) {
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.elementToBeClickable(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementToBeClickable(elementToInteract);
         elementToInteract.click();
     }
 
@@ -51,7 +40,7 @@ class StepsFactory {
         const key = keycode(keyCode).toUpperCase();
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.visibilityOf(elementToInteract), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(elementToInteract);
         elementToInteract.sendKeys(protractor.Key[key]);
     }
 
@@ -62,28 +51,28 @@ class StepsFactory {
     expectToContain(cssSelector, text) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.getText()).toContain(text);
     }
 
     expectNotToContain(cssSelector, text) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.getText()).not.toContain(text);
     }
 
     expectToEqual(cssSelector, text) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.getText()).toEqual(text);
     }
 
     expectNotToEqual(cssSelector, text) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.getText()).not.toEqual(text);
     }
 
@@ -91,54 +80,54 @@ class StepsFactory {
         const elementsToCount = retrieveAllElements(cssSelector);
         const lastElementBasedOnElementsToCount = elementsToCount.last();
 
-        browser.wait(EC.visibilityOf(lastElementBasedOnElementsToCount), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(lastElementBasedOnElementsToCount);
         expect(elementsToCount.count()).toBe(number);
     }
 
     expectToBeDisplayed(cssSelector) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.visibilityOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.isDisplayed()).toBe(true);
     }
 
     expectNotToBeDisplayed(cssSelector) {
         const elementToExpectNot = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.invisibilityOf(elementToExpectNot), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementNotToBeVisible(elementToExpectNot);
         expect(elementToExpectNot.isDisplayed()).not.toBe(true);
     }
 
     expectToBePresent(cssSelector) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.presenceOf(elementToExpect), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementPresence(elementToExpect);
         expect(elementToExpect.isPresent()).toBe(true);
     }
 
     expectNotToBePresent(cssSelector) {
         const elementToExpectNot = retrieveFirstElement(cssSelector);
 
-        browser.wait(EC.stalenessOf(elementToExpectNot), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementNotToBePresent(elementToExpectNot);
         expect(elementToExpectNot.isPresent()).not.toBe(true);
     }
 
     expectCurrentUrlToEqual(expectedUrl) {
-        browser.wait(EC.urlIs(expectedUrl), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForCurrentUrlToBeEqualTo(expectedUrl);
         expect(browser.getCurrentUrl()).toEqual(expectedUrl);
     }
 
     expectElementWithAttributeToContainValue(cssSelector, attribute, value) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        browser.wait(elementWithAttributeHasValue(elementToExpect, attribute, value), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementWithAttributeToContainValue(elementToExpect, attribute, value);
         expect(elementToExpect.getAttribute(attribute)).toContain(value);
     }
 
     expectElementWithAttributeNotToContainValue(cssSelector, attribute, value) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        browser.wait(elementWithAttributeHasNotValue(elementToExpect, attribute, value), browser.params.DEFAULT_TIMEOUT_MS);
+        waitersHelper.waitForElementWithAttributeNotToContainValue(elementToExpect, attribute, value);
         expect(elementToExpect.getAttribute(attribute)).not.toContain(value);
     }
 }
