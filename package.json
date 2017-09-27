@@ -19,6 +19,7 @@
     "server": "protractor server/protractor.conf.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate-script": "node ./server/db-tests.js"
   }
 }
