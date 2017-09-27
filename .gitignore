@@ -21,5 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 
-test-report/
+server/test-report
+test-report
 .tmp/
