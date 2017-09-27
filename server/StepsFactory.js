@@ -1,6 +1,5 @@
 const keycode = require("keycode");
-const WaitersHelper = require("./waitersHelper");
-const waitersHelper = new WaitersHelper();
+const protractorHelper = require("protractor-helper");
 
 function retrieveFirstElement(cssSelector) {
     return element.all(by.css(cssSelector)).first();
@@ -18,29 +17,28 @@ class StepsFactory {
     enterText(cssSelector, text) {
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementVisibility(elementToInteract);
+        protractorHelper.waitForElementVisibility(elementToInteract);
         elementToInteract.sendKeys(text);
     }
 
     clearTextField(cssSelector) {
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementVisibility(elementToInteract);
+        protractorHelper.waitForElementVisibility(elementToInteract);
         elementToInteract.clear();
     }
 
     click(cssSelector) {
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementToBeClickable(elementToInteract);
-        elementToInteract.click();
+        protractorHelper.clickWhenClickable(elementToInteract);
     }
 
     pressKey(cssSelector, keyCode) {
         const key = keycode(keyCode).toUpperCase();
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementVisibility(elementToInteract);
+        protractorHelper.waitForElementVisibility(elementToInteract);
         elementToInteract.sendKeys(protractor.Key[key]);
     }
 
@@ -51,28 +49,28 @@ class StepsFactory {
     expectToContain(cssSelector, text) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementVisibility(elementToExpect);
+        protractorHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.getText()).toContain(text);
     }
 
     expectNotToContain(cssSelector, text) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementVisibility(elementToExpect);
+        protractorHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.getText()).not.toContain(text);
     }
 
     expectToEqual(cssSelector, text) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementVisibility(elementToExpect);
+        protractorHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.getText()).toEqual(text);
     }
 
     expectNotToEqual(cssSelector, text) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementVisibility(elementToExpect);
+        protractorHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.getText()).not.toEqual(text);
     }
 
@@ -80,54 +78,54 @@ class StepsFactory {
         const elementsToCount = retrieveAllElements(cssSelector);
         const lastElementBasedOnElementsToCount = elementsToCount.last();
 
-        waitersHelper.waitForElementVisibility(lastElementBasedOnElementsToCount);
+        protractorHelper.waitForElementVisibility(lastElementBasedOnElementsToCount);
         expect(elementsToCount.count()).toBe(number);
     }
 
     expectToBeDisplayed(cssSelector) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementVisibility(elementToExpect);
+        protractorHelper.waitForElementVisibility(elementToExpect);
         expect(elementToExpect.isDisplayed()).toBe(true);
     }
 
     expectNotToBeDisplayed(cssSelector) {
         const elementToExpectNot = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementNotToBeVisible(elementToExpectNot);
+        protractorHelper.waitForElementNotToBeVisible(elementToExpectNot);
         expect(elementToExpectNot.isDisplayed()).not.toBe(true);
     }
 
     expectToBePresent(cssSelector) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementPresence(elementToExpect);
+        protractorHelper.waitForElementPresence(elementToExpect);
         expect(elementToExpect.isPresent()).toBe(true);
     }
 
     expectNotToBePresent(cssSelector) {
         const elementToExpectNot = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementNotToBePresent(elementToExpectNot);
+        protractorHelper.waitForElementNotToBePresent(elementToExpectNot);
         expect(elementToExpectNot.isPresent()).not.toBe(true);
     }
 
     expectCurrentUrlToEqual(expectedUrl) {
-        waitersHelper.waitForCurrentUrlToBeEqualTo(expectedUrl);
+        protractorHelper.waitForUrlToBeEqualToExpectedUrl(expectedUrl);
         expect(browser.getCurrentUrl()).toEqual(expectedUrl);
     }
 
     expectElementWithAttributeToContainValue(cssSelector, attribute, value) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementWithAttributeToContainValue(elementToExpect, attribute, value);
+        protractorHelper.waitForElementAttributeToHaveValue(elementToExpect, attribute, value);
         expect(elementToExpect.getAttribute(attribute)).toContain(value);
     }
 
     expectElementWithAttributeNotToContainValue(cssSelector, attribute, value) {
         const elementToExpect = retrieveFirstElement(cssSelector);
 
-        waitersHelper.waitForElementWithAttributeNotToContainValue(elementToExpect, attribute, value);
+        protractorHelper.waitForElementAttributeNotToHaveValue(elementToExpect, attribute, value);
         expect(elementToExpect.getAttribute(attribute)).not.toContain(value);
     }
 }
