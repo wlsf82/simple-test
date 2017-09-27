@@ -9,22 +9,22 @@ const sampleTestSuite =
             steps: [
                 {
                     action: "Go to URL",
-                    url: "https://google.com"
+                    string: "https://google.com"
                 },
                 {
                     action: "Enter text",
                     css_selector: "#lst-ib",
-                    text: "foo"
+                    string: "foo"
                 },
                 {
                     action: "Press key",
                     css_selector: "#lst-ib",
-                    key: "ENTER"
+                    key_code: 13
                 },
                 {
                     action: "Expect to contain",
                     css_selector: "#search h3 a",
-                    text: "Foo"
+                    string: "Foo"
                 }
             ]
         },
@@ -33,7 +33,7 @@ const sampleTestSuite =
             steps: [
                 {
                     action: "Go to URL",
-                    url: "http://todomvc.com"
+                    string: "http://todomvc.com"
                 },
                 {
                     action: "Click",
@@ -50,7 +50,7 @@ const sampleTestSuite =
             steps: [
                 {
                     action: "Go to URL",
-                    url: "http://todomvc.com/examples/react/#/",
+                    string: "http://todomvc.com/examples/react/#/",
                 },
                 {
                     action: "Expect element with attribute to contain value",
@@ -65,7 +65,7 @@ const sampleTestSuite =
             steps: [
                 {
                     action: "Go to URL",
-                    url: "http://todomvc.com/examples/react/#/",
+                    string: "http://todomvc.com/examples/react/#/",
                 },
                 {
                     action: "Expect element with attribute not to contain value",

@@ -7,12 +7,12 @@ const sampleTestSuite =
         beforeEach: [
             {
                 action: "Go to URL",
-                url: "http://todomvc.com/examples/react/#/"
+                string: "http://todomvc.com/examples/react/#/"
             },
             {
                 action: "Enter text",
                 css_selector: ".new-todo",
-                text: "foo"
+                string: "foo"
             }
         ],
         afterAll: [
@@ -26,7 +26,7 @@ const sampleTestSuite =
                 {
                     action: "Press key",
                     css_selector: ".new-todo",
-                    key: "ENTER"
+                    key_code: 13
                 },
                 {
                     action: "Expect count to be",

@@ -7,13 +7,13 @@ const sampleTestSuite =
         beforeAll: [
             {
                 action: "Go to URL",
-                url: "https://gmail.com"
+                string: "https://gmail.com"
             }
         ],
         beforeEach: [
             {
                 action: "Go to URL",
-                url: "https://google.com"
+                string: "https://google.com"
             },
             {
                 action: "Click",
@@ -23,13 +23,13 @@ const sampleTestSuite =
         afterEach: [
             {
                 action: "Go to URL",
-                url: "https://drive.google.com"
+                string: "https://drive.google.com"
             }
         ],
         afterAll: [
             {
                 action: "Go to URL",
-                url: "http://google.com/pagenotfound"
+                string: "http://google.com/pagenotfound"
             }
         ],
         testCases: [{
@@ -37,22 +37,22 @@ const sampleTestSuite =
             steps: [
                 {
                     action: "Go to URL",
-                    url: "https://google.com"
+                    string: "https://google.com"
                 },
                 {
                     action: "Enter text",
                     css_selector: "#lst-ib",
-                    text: "foo"
+                    string: "foo"
                 },
                 {
                     action: "Press key",
                     css_selector: "#lst-ib",
-                    key: "ENTER"
+                    key_code: 13
                 },
                 {
                     action: "Expect to contain",
                     css_selector: "#search h3 a",
-                    text: "Foo"
+                    string: "Foo"
                 }
             ]
         },
@@ -61,22 +61,22 @@ const sampleTestSuite =
             steps: [
                 {
                     action: "Go to URL",
-                    url: "https://google.com"
+                    string: "https://google.com"
                 },
                 {
                     action: "Enter text",
                     css_selector: "#lst-ib",
-                    text: "foobar"
+                    string: "foobar"
                 },
                 {
                     action: "Press key",
                     css_selector: "#lst-ib",
-                    key: "ENTER"
+                    key_code: 13
                 },
                 {
                     action: "Expect to contain",
                     css_selector: "#search h3 a",
-                    text: "foobar"
+                    string: "foobar"
                 }
             ]
         }]
