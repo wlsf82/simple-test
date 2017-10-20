@@ -21,6 +21,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "db-tests": "node ./server/db-tests.js && webdriver-manager update && protractor ./server/db.protractor.conf.js"
+    "db-tests": "rm -rf ./server/.tmp && node ./server/db-tests.js && webdriver-manager update && protractor ./server/db.protractor.conf.js"
   }
 }
