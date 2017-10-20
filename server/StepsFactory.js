@@ -17,15 +17,13 @@ class StepsFactory {
     enterText(cssSelector, text) {
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        protractorHelper.waitForElementVisibility(elementToInteract);
-        elementToInteract.sendKeys(text);
+        protractorHelper.sendKeysWhenVisible(elementToInteract, text);
     }
 
     clearTextField(cssSelector) {
         const elementToInteract = retrieveFirstElement(cssSelector);
 
-        protractorHelper.waitForElementVisibility(elementToInteract);
-        elementToInteract.clear();
+        protractorHelper.clearFieldWhenVisible(elementToInteract);
     }
 
     click(cssSelector) {
