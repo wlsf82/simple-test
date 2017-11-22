@@ -53,5 +53,6 @@ module.exports = {
     publicUrl: getPublicUrl(resolveApp("package.json")),
     servedPath: getServedPath(resolveApp("package.json")),
     server: resolveApp("./server"),
+    db: resolveApp("./db"),
     tmp: resolveApp("./server/.tmp"),
 };
