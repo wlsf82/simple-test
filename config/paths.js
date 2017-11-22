@@ -54,5 +54,6 @@ module.exports = {
     servedPath: getServedPath(resolveApp("package.json")),
     server: resolveApp("./server"),
     db: resolveApp("./db"),
+    api: resolveApp("./api"),
     tmp: resolveApp("./server/.tmp"),
 };
