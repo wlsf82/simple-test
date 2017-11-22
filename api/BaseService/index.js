@@ -12,7 +12,9 @@ class BaseService {
     }
 
     fetchById(id) {
-        return this.repository.fetchRecordBy();
+        assert.ok(typeof id === "number", "id<number> is required");
+
+        return this.repository.fetchRecordBy(id);
     }
 }
 
