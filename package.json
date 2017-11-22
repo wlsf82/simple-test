@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
     "keycode": "^2.1.9",
     "knex": "^0.13.0",
     "mkdirp": "^0.5.1",
@@ -17,6 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "api": "node ./server/restful-api.js",
     "server": "webdriver-manager update && protractor server/protractor.conf.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
