@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "keycode": "^2.1.9",
     "knex": "^0.13.0",
     "mkdirp": "^0.5.1",
+    "prop-types": "^15.6.0",
     "protractor": "^5.2.0",
     "protractor-helper": "^2.0.3",
     "protractor-jasmine2-html-reporter": "0.0.7",
