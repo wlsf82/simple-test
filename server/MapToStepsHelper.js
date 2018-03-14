@@ -1,5 +1,6 @@
 const StepsFactory = require("./StepsFactory");
 const stepsFactory = new StepsFactory();
+
 const GO_TO_URL = "Go to URL";
 const ENTER_TEXT = "Enter text";
 const CLEAR_TEXT_FIELD = "Clear text field";
@@ -20,8 +21,8 @@ const EXPECT_ELEMENT_WITH_ATTRIBUTE_TO_CONTAIN_VALUE = "Expect element with attr
 const EXPECT_ELEMENT_WITH_ATTRIBUTE_NOT_TO_CONTAIN_VALUE = "Expect element with attribute not to contain value";
 
 class MapToStepsHelper {
-    addSteps(testCase) {
-        testCase.forEach((step) => {
+    addSteps(steps) {
+        steps.forEach(step => {
             switch (step.description) {
                 case GO_TO_URL:
                     stepsFactory.goToUrl(step.string);
@@ -77,6 +78,8 @@ class MapToStepsHelper {
                 case EXPECT_ELEMENT_WITH_ATTRIBUTE_NOT_TO_CONTAIN_VALUE:
                     stepsFactory.expectElementWithAttributeNotToContainValue(step.css_selector, step.attribute, step.value);
                     break;
+                default:
+                    return;
             }
         });
     }

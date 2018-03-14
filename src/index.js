@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import axios from "axios";
 
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import "./index.css";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
 import { ActionService, ExpectationService, ProjectService, StepService, TestService } from "./client-api";
 
 const apiUri = "http://localhost:5050/api";
@@ -21,16 +21,16 @@ Promise.all([
     projectService.fetchAll(),
     stepService.fetchAll(),
     testService.fetchAll(),
-]).then((data) => {
+]).then(data => {
     const store = [
-        actions,
-        expectations,
-        projects,
-        steps,
-        tests,
+        data.actions,
+        data.expectations,
+        data.projects,
+        data.steps,
+        data.tests,
     ];
 
-    ReactDOM.render(<App store={store} />, document.getElementById('root'));
+    ReactDOM.render(<App store={store} />, document.getElementById("root"));
 });
 
 registerServiceWorker();

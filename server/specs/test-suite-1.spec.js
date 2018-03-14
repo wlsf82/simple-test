@@ -6,29 +6,29 @@ const sampleTestSuite =
         description: "Google",
         beforeAll: [
             {
-                action: "Go to URL",
+                description: "Go to URL",
                 string: "https://gmail.com"
             }
         ],
         beforeEach: [
             {
-                action: "Go to URL",
+                description: "Go to URL",
                 string: "https://google.com"
             },
             {
-                action: "Click",
+                description: "Click",
                 css_selector: "input[name='btnI']"
             }
         ],
         afterEach: [
             {
-                action: "Go to URL",
+                description: "Go to URL",
                 string: "https://drive.google.com"
             }
         ],
         afterAll: [
             {
-                action: "Go to URL",
+                description: "Go to URL",
                 string: "http://google.com/pagenotfound"
             }
         ],
@@ -36,21 +36,21 @@ const sampleTestSuite =
             description: "search for 'foo'",
             steps: [
                 {
-                    action: "Go to URL",
+                    description: "Go to URL",
                     string: "https://google.com"
                 },
                 {
-                    action: "Enter text",
+                    description: "Enter text",
                     css_selector: "#lst-ib",
                     string: "foo"
                 },
                 {
-                    action: "Press key",
+                    description: "Press key",
                     css_selector: "#lst-ib",
                     key_code: 13
                 },
                 {
-                    action: "Expect to contain",
+                    description: "Expect to contain",
                     css_selector: "#search h3 a",
                     string: "Foo"
                 }
@@ -60,21 +60,21 @@ const sampleTestSuite =
             description: "search for 'foobar'",
             steps: [
                 {
-                    action: "Go to URL",
+                    description: "Go to URL",
                     string: "https://google.com"
                 },
                 {
-                    action: "Enter text",
+                    description: "Enter text",
                     css_selector: "#lst-ib",
                     string: "foobar"
                 },
                 {
-                    action: "Press key",
+                    description: "Press key",
                     css_selector: "#lst-ib",
                     key_code: 13
                 },
                 {
-                    action: "Expect to contain",
+                    description: "Expect to contain",
                     css_selector: "#search h3 a",
                     string: "foobar"
                 }

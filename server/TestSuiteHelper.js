@@ -7,39 +7,34 @@ const testCasesFactory = new TestCasesFactory();
 class TestSuiteHelper {
     addBeforeAllCallbackOnTestSuite(testSuite, isSet) {
         if (isSet) {
-            beforeAll(() => {
-                mapToStepsHelper.addSteps(testSuite.beforeAll);
-            });
+            beforeAll(() => mapToStepsHelper.addSteps(testSuite.beforeAll));
         }
     }
 
     addBeforeEachCallbackOnTestSuite(testSuite, isSet) {
         if (isSet) {
-            beforeEach(() => {
-                mapToStepsHelper.addSteps(testSuite.beforeEach);
-            });
+            beforeEach(() => mapToStepsHelper.addSteps(testSuite.beforeEach));
         }
     }
 
     addAfterAllCallbackOnTestSuite(testSuite, isSet) {
         if (isSet) {
-            afterAll(() => {
-                mapToStepsHelper.addSteps(testSuite.afterAll);
-            });
+            afterAll(() => mapToStepsHelper.addSteps(testSuite.afterAll));
         }
     }
 
     addAfterEachCallbackOnTestSuite(testSuite, isSet) {
         if (isSet) {
-            afterEach(() => {
-                mapToStepsHelper.addSteps(testSuite.afterEach);
-            });
+            afterEach(() => mapToStepsHelper.addSteps(testSuite.afterEach));
         }
     }
 
     addTestCasesCallbacksOnTestSuite(testSuite) {
-        testSuite.testCases.forEach((testCase) => {
-            testCasesFactory.addStepsOnTestCaseBeasedOnDescription(testCase.description, testCase.steps);
+        testSuite.testCases.forEach(testCase => {
+            testCasesFactory.addStepsOnTestCaseBeasedOnDescription(
+                testCase.description,
+                testCase.steps
+            );
         });
     }
 

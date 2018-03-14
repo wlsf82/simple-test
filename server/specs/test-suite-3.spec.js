@@ -6,39 +6,39 @@ const sampleTestSuite =
         description: "TODO MVC React",
         beforeEach: [
             {
-                action: "Go to URL",
+                description: "Go to URL",
                 string: "http://todomvc.com/examples/react/#/"
             },
             {
-                action: "Enter text",
+                description: "Enter text",
                 css_selector: ".new-todo",
                 string: "foo"
             }
         ],
         afterAll: [
             {
-                action: "Refresh page"
+                description: "Refresh page"
             }
         ],
         testCases: [{
             description: "add an item in the TODO list",
             steps: [
                 {
-                    action: "Press key",
+                    description: "Press key",
                     css_selector: ".new-todo",
                     key_code: 13
                 },
                 {
-                    action: "Expect count to be",
+                    description: "Expect count to be",
                     css_selector: ".todo-list li",
                     number: 1
                 },
                 {
-                    action: "Click",
+                    description: "Click",
                     css_selector: ".toggle-all"
                 },
                 {
-                    action: "Click",
+                    description: "Click",
                     css_selector: ".clear-completed"
                 }
             ]
@@ -47,11 +47,11 @@ const sampleTestSuite =
             description: "clear input field before adding item in the TODO list",
             steps: [
                 {
-                    action: "Clear text field",
+                    description: "Clear text field",
                     css_selector: ".new-todo"
                 },
                 {
-                    action: "Expect not to be present",
+                    description: "Expect not to be present",
                     css_selector: ".todo-list"
                 }
             ]

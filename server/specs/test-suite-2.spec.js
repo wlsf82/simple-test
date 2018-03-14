@@ -8,21 +8,21 @@ const sampleTestSuite =
             description: "search for 'foo'",
             steps: [
                 {
-                    action: "Go to URL",
+                    description: "Go to URL",
                     string: "https://google.com"
                 },
                 {
-                    action: "Enter text",
+                    description: "Enter text",
                     css_selector: "#lst-ib",
                     string: "foo"
                 },
                 {
-                    action: "Press key",
+                    description: "Press key",
                     css_selector: "#lst-ib",
                     key_code: 13
                 },
                 {
-                    action: "Expect to contain",
+                    description: "Expect to contain",
                     css_selector: "#search h3 a",
                     string: "Foo"
                 }
@@ -32,46 +32,16 @@ const sampleTestSuite =
             description: "expect URL to change",
             steps: [
                 {
-                    action: "Go to URL",
+                    description: "Go to URL",
                     string: "http://todomvc.com"
                 },
                 {
-                    action: "Click",
+                    description: "Click",
                     css_selector: "a[href='examples/react']"
                 },
                 {
-                    action: "Expect current URL to equal",
+                    description: "Expect current URL to equal",
                     expectedUrl: "http://todomvc.com/examples/react/#/",
-                }
-            ]
-        },
-        {
-            description: "expect element with attribute to contain value",
-            steps: [
-                {
-                    action: "Go to URL",
-                    string: "http://todomvc.com/examples/react/#/",
-                },
-                {
-                    action: "Expect element with attribute to contain value",
-                    css_selector: ".new-todo",
-                    attribute: "placeholder",
-                    value: "What needs to be done?"
-                }
-            ]
-        },
-        {
-            description: "expect element with attribute not to contain value",
-            steps: [
-                {
-                    action: "Go to URL",
-                    string: "http://todomvc.com/examples/react/#/",
-                },
-                {
-                    action: "Expect element with attribute not to contain value",
-                    css_selector: ".new-todo",
-                    attribute: "placeholder",
-                    value: "foobarbaz"
                 }
             ]
         }]

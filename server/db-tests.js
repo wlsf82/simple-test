@@ -38,7 +38,7 @@ async function createObj(projectId = 1, testId = 1) {
     try {
         const { description } = await getProjectById(projectId);
         const testCases = await getTestCasesByProjectId(projectId);
-        
+
         for (let i = 0; i < testCases.length; i++) {
             const testCase = testCases[i];
             testCase.steps = await getStepsByTestId(testCase.id);
@@ -67,7 +67,7 @@ const removeDirPromiseFunc = (dirPath) => {
                 reject(err);
                 return;
             }
-            
+
             resolve();
             console.log("The dir has been removed! Path: ", dirPath);
         });
@@ -81,7 +81,7 @@ const createDirPromiseFunc = (dirPath, content) => {
                 reject(err);
                 return;
             }
-            
+
             resolve();
             console.log("The dir has been created! Path: ", dirPath);
         });
@@ -95,7 +95,7 @@ const writeFilePromiseFunc = (path, content) => {
                 reject(err);
                 return;
             }
-            
+
             resolve();
             console.log("The file has been created! Path: ", path);
         });
@@ -113,8 +113,8 @@ async function main() {
             "utf-8"
         );
         fs.writeFileSync( // Create JSON file
-            path.resolve(paths.tmp, "some-file.js"), 
-            testSuiteContent.replace(/{{templateData}}/, JSON.stringify(jsonData)), 
+            path.resolve(paths.tmp, "some-file.js"),
+            testSuiteContent.replace(/{{templateData}}/, JSON.stringify(jsonData)),
             "utf8"
         );
     }

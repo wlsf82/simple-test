@@ -1,7 +1,7 @@
 const Jasmine2HtmlReporter = require("protractor-jasmine2-html-reporter");
+const SpecReporter = require("jasmine-spec-reporter").SpecReporter;
 
 module.exports.config = {
-    directConnect: true,
     specs: [ "./specs/*.spec.js" ],
     capabilities: {
         "browserName": "chrome",
@@ -17,8 +17,15 @@ module.exports.config = {
             fileName: "e2e-test-report",
             fixedScreenshotName: true,
             cleanDestination: false,
-            consolidate: false,
+            consolidate: true,
             takeScreenshotsOnlyOnFailures: true,
+        }));
+
+        jasmine.getEnv().addReporter(new SpecReporter({
+            displayFailuresSummary: true,
+            displayFailedSpec: true,
+            displaySuiteNumber: true,
+            displaySpecDuration: true,
         }));
     }
 };
