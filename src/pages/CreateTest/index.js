@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
-import "./App.css";
+import "./index.css";
 
 function DataSelect({ obj, name }) {
     return (
@@ -17,13 +17,17 @@ function DataSelect({ obj, name }) {
     );
 }
 
-class App extends Component {
+export default class Home extends React.Component {
     static propTypes = {
-        store: PropTypes.object.isRequired,
+        actions: PropTypes.array.isRequired,
+        expectations: PropTypes.array.isRequired,
+        projects: PropTypes.array.isRequired,
+        steps: PropTypes.array.isRequired,
+        tests: PropTypes.array.isRequired,
     }
 
     render() {
-        const { actions, expectations } = this.props.store;
+        const { actions, expectations } = this.props;
         return (
             <div className="App">
             <form className="Form">
@@ -87,5 +91,3 @@ class App extends Component {
         );
     }
 }
-
-export default App;

@@ -1,11 +1,15 @@
-import React from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "./index.css";
-import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { ActionService, ExpectationService, ProjectService, StepService, TestService } from "./client-api";
+
+import App from "./containers/App";
+import HomePage from "./pages/Home";
+import CreateTestPage from "./pages/CreateTest";
 
 const apiUri = "http://localhost:5050/api";
 const apiClient = axios;
@@ -21,16 +25,33 @@ Promise.all([
     projectService.fetchAll(),
     stepService.fetchAll(),
     testService.fetchAll(),
-]).then(data => {
-    const store = [
-        data.actions,
-        data.expectations,
-        data.projects,
-        data.steps,
-        data.tests,
-    ];
-
-    ReactDOM.render(<App store={store} />, document.getElementById("root"));
+]).then(([
+    actions,
+    expectations,
+    projects,
+    steps,
+    tests,
+]) => {
+    ReactDOM.render((
+        <BrowserRouter
+            basename={"/"}
+        >
+            <App>
+                <Switch>
+                    <Route exact path="/" component={HomePage}/>
+                    <Route exact path="/create-test" render={() => (
+                        <CreateTestPage
+                            actions={actions}
+                            expectations={expectations}
+                            projects={projects}
+                            steps={steps}
+                            tests={tests}
+                        />
+                    )}/>
+                </Switch>
+            </App>
+        </BrowserRouter>
+    ), document.getElementById("root"));
 });
 
 registerServiceWorker();
